@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  web:
+#    build: .
+    image: arifamru/fedev:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/app
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
+      - "80:80"  # Forward HTTP traffic
+      - "443:443"  # Forward HTTPS traffic, if needed
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    driver: bridge

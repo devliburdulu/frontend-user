@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2945f1d9-a0c7-4084-b533-96a7ba48dfb2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../spiinwheel/public/arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spiinwheel/public/css/25642.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spiinwheel/public/css/winwheel.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/spins/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bina-sawit-mandiri-backend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../bina-sawit-mandiri-backend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bina-sawit-mandiri-backend/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/../bina-sawit-mandiri-backend/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/liburdulu-fe-nextjs.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/liburdulu-fe-nextjs.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/VetClinic.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/Api/ResourceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/Api/ResourceController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/FrontEndController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/FrontEndController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/PaymentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/SettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/SettingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Models/Payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Models/Payment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Models/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Models/Setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Providers/CompanyServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Providers/CompanyServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/Repositories/SettingRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/Repositories/SettingRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/database/migrations/2022_11_09_183205_create_installments_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/packages/architectui-templates/templates/scaffold/fields/file.stub" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/packages/architectui-templates/templates/scaffold/fields/file.stub" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/public/assets/scripts/main.8d288f825d8dffbbe55e.js" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/public/assets/scripts/main.8d288f825d8dffbbe55e.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/public/js/chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/public/js/chart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/public/main.8d288f825d8dffbbe55e.css" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/public/main.8d288f825d8dffbbe55e.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/public/vendor/adminlte/plugins/flot/excanvas.js" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/public/vendor/adminlte/plugins/flot/excanvas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/appointments/schedule.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/appointments/schedule.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/doctors/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/doctors/fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/employees/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/employees/fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/inpatients/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/inpatients/fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/app-architect.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/app-architect.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/architectui-templates/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/architectui-templates/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/header-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/header-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/side-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/layouts/side-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/member/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/member/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/pages/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/pages/fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/payments/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/payments/fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/payments/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/payments/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/payments/js.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/payments/js.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/show_fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/show_fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/settings/table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/resources/views/users/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/resources/views/users/fields.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../spiinwheel/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/../spiinwheel/routes/web.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../spiinwheel" />
+  </component>
+  <component name="ProjectId" id="2j4Wr6w37EodLX3ltpebWMuBQgD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../VetClinic" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2945f1d9-a0c7-4084-b533-96a7ba48dfb2" name="Default Changelist" comment="" />
+      <created>1720647032031</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1720647032031</updated>
+      <workItem from="1720647036633" duration="3646000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -1,0 +1,100 @@
+/* Custom positioning untuk Yellow.ai chat widget */
+#ymDivBar {
+    /* background: #1D9CAB !important; */
+    bottom: 91px !important;
+    right: 40px !important;
+    z-index: 10 !important;
+    box-shadow: none !important;
+}
+
+/* #ymDivBar * {
+    z-index: 9999 !important;
+} */
+
+@media (max-width: 768px) {
+    #ymDivBar {
+        bottom: 91px !important;
+        right: 35px !important;
+    }
+}
+
+/* @media (min-width: 769px) and (max-width: 1024px) {
+    #ymDivBar {
+        bottom: 110px !important;
+        right: 18px !important;
+    }
+} */
+
+#ymDivBar {
+    transition: all 0.3s ease-in-out;
+}
+
+#ymDivBar {
+    position: fixed !important;
+}
+
+/* Styling untuk hint text */
+.yellow-ai-hint {
+    position: fixed;
+    top: auto;
+    bottom: 90px;
+    right: 120px;
+    background: #1D9CAB;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); */
+    pointer-events: none;
+}
+
+/* Show state */
+.yellow-ai-hint.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hide state */
+.yellow-ai-hint.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Arrow untuk tooltip */
+.yellow-ai-hint::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid #1D9CAB;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+/* Responsive design untuk hint text */
+@media (max-width: 768px) {
+    .yellow-ai-hint {
+        bottom: 100px;
+        right: 110px;
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+/* @media (min-width: 769px) and (max-width: 1024px) {
+    .yellow-ai-hint {
+        bottom: 75px;
+        right: 110px;
+        font-size: 13px;
+        padding: 7px 11px;
+    }
+} */

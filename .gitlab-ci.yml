@@ -1,0 +1,222 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  
+
+stages:          # List of stages for jobs, and their order of execution
+  - staging
+  - build
+  - production
+
+DeployToStaging:
+  stage: staging
+  script:
+    - echo "📁 Starting deployment to staging..."
+    - pwd
+
+    # Define variables
+    - export APP_DIR="/home/gitlab-runner/liburdulu-fe-nextjs"
+    - export BUILD_DIR=pwd
+
+    # Clean up and copy project
+    - echo "🧹 Cleaning old builds..."
+    - sudo rm -rf "$APP_DIR"
+    - sudo rm -rf "$BUILD_DIR"/*
+    - echo "📥 Copying project to $APP_DIR..."
+    - sudo cp -r . "$APP_DIR"
+
+    # Go to app directory
+    - cd "$APP_DIR"
+    - pwd
+
+    # Setup environment
+    - sudo cp env.staging .env
+    - cat .env
+
+    # Fix permissions
+    - echo "🔒 Setting permissions..."
+    - sudo chown -R ubuntu:ubuntu .
+    - sudo chmod -R 755 .
+
+    # Install dependencies
+    - echo "📦 Installing dependencies..."
+    - sudo npm install
+    - sudo npm install sharp
+
+    # Build with memory limit
+    - echo "🏗️ Building project..."
+    - sudo NODE_OPTIONS="--max-old-space-size=4096" npm run build
+
+    # Validate chunks built
+    - echo "🔍 Validating built chunks..."
+    - CHUNKS_DIR=".next/static/chunks"
+    - |
+      if [ ! -d "$CHUNKS_DIR" ]; then
+        echo "❌ ERROR: $CHUNKS_DIR not found!"
+        exit 1
+      fi
+    - NUM_CHUNKS=$(find "$CHUNKS_DIR" -type f -name "*.js" | wc -l)
+    - echo "📦 Found $NUM_CHUNKS chunks"
+    - |
+      if [ "$NUM_CHUNKS" -lt 5 ]; then
+        echo "❌ ERROR: Too few chunk files. Build might have failed."
+        exit 1
+      fi
+
+    # PM2 process management
+    - echo "🔄 Restarting app with PM2..."
+    - sudo pm2 stop nextjs-app || true
+    - sudo pm2 delete nextjs-app || true
+    - sudo pm2 start npm --name "nextjs-app" -- start
+    - sudo pm2 save
+    - sudo pm2 startup
+
+    # Final permissions
+    - echo "✅ Finalizing permissions..."
+    - sudo chown -R ubuntu:ubuntu .
+    - sudo chmod -R 755 .
+
+    # Summary
+    - echo "✅ Deployment to staging complete!"
+    - ls -al
+
+  only:
+    - staging
+  tags:
+    - stagingfe
+    - stagingfenext
+
+#
+#CreateImage:       # This job runs in the build stage, which runs first.
+#  stage: build
+#  script:
+#    - pwd
+#    - sudo rm -rf /home/gitlab-runner/liburdulu-fe-nextjs-prod
+#    - sudo cp -r . /home/gitlab-runner/liburdulu-fe-nextjs-prod/
+#    - cd /home/gitlab-runner/liburdulu-fe-nextjs-prod/
+#    - sudo rm -rf /home/gitlab-runner/builds/*
+#    - sudo chmod -R 777 *
+#    - sudo cp env.production .env
+#    - cat .env
+#    - pwd
+#    - sudo chmod -R 777 *
+#    - ls -al
+#    - sudo npm i
+#    - sudo npm install sharp
+#    - sudo npm run build
+#    - sudo chmod -R 777 *
+#    - docker system prune -a -f
+#    - sudo docker build -t arifamru/fedev:latest .
+#    - sudo docker push arifamru/fedev:latest
+#  only:
+#    - staging
+#  tags:
+#    - stagingfe
+#    - stagingfenext
+
+#deployToProduction:       # This job runs in the build stage, which runs first.
+#  stage: production
+#  script:
+#    - pwd
+#    - whoami
+#    - sudo rm -rf /home/gitlab-runner/liburdulu-fe-nextjs/*
+#    - sudo cp -R . /home/gitlab-runner/liburdulu-fe-nextjs/
+#    - cd /home/gitlab-runner/liburdulu-fe-nextjs/
+#    - sudo chmod -R 777 *
+#    - sudo chown -R gitlab-runner:gitlab-runner *
+#    - pwd
+#    - npm i
+#    - npm install sharp
+#    - npm run build
+#    - sudo chmod -R 777 *
+#    - sudo chown -R gitlab-runner:gitlab-runner *
+#    - sudo docker system prune -a -f
+#    - sudo docker pull arifamru/fedev:latest
+#    - sudo docker-compose down
+#    - sudo docker-compose up -d
+
+#  only:
+#    - Production
+#  tags:
+#    - production
+#    - productionfe
+
+
+DeployToProduction:
+  stage: production
+  script:
+    - echo "🚀 Starting deployment to production..."
+
+    # Define variables
+    - export APP_DIR="/home/gitlab-runner/liburdulu-fe-nextjs-prod"
+    - export BUILD_DIR=pwd
+
+    # Clean up old data and copy project
+    - echo "🧹 Cleaning up previous builds..."
+    - sudo rm -rf "$APP_DIR"
+    - sudo rm -rf "$BUILD_DIR"/*
+    - echo "📥 Copying files to $APP_DIR..."
+    - sudo cp -r . "$APP_DIR"
+    - cd "$APP_DIR"
+
+    # Setup environment
+    - echo "⚙️ Setting up environment file..."
+    - sudo cp env.production .env
+    - cat .env
+
+    # Fix permissions
+    - echo "🔒 Setting ownership and permissions..."
+    - sudo chown -R ubuntu:ubuntu .
+    - sudo chmod -R 755 .
+
+    # Install dependencies
+    - echo "📦 Installing dependencies..."
+    - sudo npm install
+    - sudo npm install sharp
+
+    # Build app
+    - echo "🏗️ Running production build..."
+    - sudo NODE_OPTIONS="--max-old-space-size=2048" npm run build
+
+    # Validate build chunks
+    - echo "🔍 Validating build..."
+    - CHUNKS_DIR=".next/static/chunks"
+    - |
+      if [ ! -d "$CHUNKS_DIR" ]; then
+        echo "❌ ERROR: $CHUNKS_DIR not found!"
+        exit 1
+      fi
+    - NUM_CHUNKS=$(find "$CHUNKS_DIR" -type f -name "*.js" | wc -l)
+    - echo "📦 Found $NUM_CHUNKS chunks"
+    - |
+      if [ "$NUM_CHUNKS" -lt 5 ]; then
+        echo "❌ ERROR: Too few chunk files. Build might have failed."
+        exit 1
+      fi
+
+    # Manage PM2 process
+    - echo "🔄 Restarting PM2 process..."
+    - sudo pm2 stop nextjs-app || true
+    - sudo pm2 delete nextjs-app || true
+    - sudo pm2 start npm --name "nextjs-app" -- start
+    - sudo pm2 save
+    - sudo pm2 startup
+
+    # Final permissions
+    - echo "✅ Finalizing permissions..."
+    - sudo chown -R ubuntu:ubuntu .
+    - sudo chmod -R 755 .
+
+    # Summary
+    - echo "✅ Production deployment complete!"
+    - ls -al
+
+  only:
+    - Production
+  tags:
+    - production
+    - productionfenext

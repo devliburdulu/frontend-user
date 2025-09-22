@@ -1,0 +1,97 @@
+/* Rentang tengah */
+/* .calendar-container .rdp-day_range_middle {
+    background-color: #1D9CAB !important;
+    color: white !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+} */
+
+.calendar-mobile .rdp-months {
+    justify-content: center;
+}
+
+.calendar-mobile .rdp-months .rdp-month {
+    width: 100%;
+}
+
+.calendar-mobile .rdp-months .rdp-month .rdp-month_grid {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.calendar-mobile .rdp-months .rdp-nav {
+    display: none;
+}
+
+.calendar-mobile .rdp-months .rdp-month .rdp-month_caption {
+    justify-content: center;
+}
+
+.calendar-mobile .rdp-months .rdp-month .rdp-month_caption .rdp-caption_label {
+    font-size: 1rem;
+}
+
+.rdp-nav button .rdp-chevron {
+    fill: #1D9CAB;
+}
+
+.rdp-month .rdp-month_caption .rdp-caption_label {
+    font-weight: 600;
+}
+
+.rdp-day.rdp-today .rdp-day_button {
+    color: #1D9CAB;
+    font-weight: 600;
+}
+
+.rdp-day.rdp-today .rdp-day_button:hover {
+    color: white;
+    font-weight: 600;
+}
+
+.rdp-day.rdp-selected.rdp-range_start .rdp-day_button,
+.rdp-day.rdp-selected.rdp-range_end .rdp-day_button {
+    font-weight: 600;
+    color: white;
+    background-color: #1D9CAB;
+    border: 1px solid #1D9CAB;
+}
+
+.rdp-day.rdp-selected.rdp-range_middle .rdp-day_button {
+    font-weight: 600;
+}
+
+.rdp-weekdays th:nth-child(7) {
+    color: #f15c59 !important;
+}
+
+/* Hover effect */
+/* .rdp-day:hover {
+    font-weight: 600;
+    color: white !important;
+    background-color: #1D9CAB;
+    border-radius: 50%;
+} */
+
+.rdp-day:hover .rdp-day_button {
+    font-weight: 600;
+    color: white !important;
+    background-color: #1D9CAB;
+    /* border-radius: 50%; */
+}
+
+.rdp-day .rdp-today:hover {
+    color: white !important;
+}
+
+/* .calendar-mobile {
+    width: 100vw !important;
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+} */
+
+/* Animasi untuk feedback click */
+.rdp-day .rdp-day_button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}

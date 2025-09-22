@@ -1,0 +1,9 @@
+export { default as LoginView } from "./login-view";
+export { default as RegisterView } from "./register-view";
+export { default as RegisterMitraView } from "./register-mitra-view";
+export { default as RegisterMitraMainView } from "./register-mitra-main-view";
+export { default as RegisterMitraStepperView } from "./register-mitra-stepper-view";
+export { default as ResetPassword } from "./reset-password";
+export { default as ForgotPasswordView } from "./forgot-password-view";
+export { default as NewPasswordView } from "./new-password-view";
+export { default as GoogleAuthCallback } from "./login-google-view";
