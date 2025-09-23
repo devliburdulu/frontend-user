@@ -4,7 +4,7 @@ import Iconify from 'src/components/iconify';
 export const menuConfig = [
   {
     id: 44,
-    title: 'Hotel',
+    title: 'Hotel Vercel',
     path: paths.hotel,
   },
   {
