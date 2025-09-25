@@ -42,8 +42,7 @@ export const getHotels = async (
   hotelName,
   sortBy,
   starRating,
-  page,
-  correlationId
+  page
 ) => {
   try {
     isoID = 'ID';
@@ -66,11 +65,6 @@ export const getHotels = async (
 
     if (starRating) {
       url += `&starRating=${starRating}`;
-    }
-
-    // Add correlationId for page 2 and onwards
-    if (page > 1 && correlationId) {
-      url += `&correlationId=${correlationId}`;
     }
 
     // &starRating=${starRating}

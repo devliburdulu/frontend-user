@@ -90,7 +90,6 @@ DeployToStaging:
     - stagingfe
     - stagingfenext
 
-#
 #CreateImage:       # This job runs in the build stage, which runs first.
 #  stage: build
 #  script:

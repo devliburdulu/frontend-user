@@ -87,7 +87,6 @@ export default function MyOrderCard() {
     setLoading(true);
     try {
       const result = await getPageOrder(user.id);
-      //
       setData(result);
 
       // Apply pagination

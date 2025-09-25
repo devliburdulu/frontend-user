@@ -81,7 +81,7 @@ export const FilterProvider = ({ children }) => {
           minPrice: parseInt(params.minPrice) || 0,
           maxPrice: parseInt(params.maxPrice) || 10000000,
           page: parseInt(params.page) || 1,
-          correlationId: params.correlationId || null,
+          CorrelationId: params.CorrelationId || null,
         };
       }
 
@@ -148,19 +148,11 @@ export const FilterProvider = ({ children }) => {
         hasChanges = true;
       }
 
-      if (
-        params.correlationId !== undefined &&
-        params.correlationId !== filterData.correlationId
-      ) {
-        updatedData.correlationId = params.correlationId;
-        hasChanges = true;
-      }
-
       if (hasChanges) {
         setFilterData(updatedData);
       }
     }
-  }, [searchParams, isReady]); // Remove filterData from dependency to prevent loop
+  }, [searchParams, isReady, filterData]);
 
   return (
     <FilterContext.Provider value={{ filterData, setFilterData, isReady }}>

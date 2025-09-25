@@ -7,6 +7,7 @@ import './yellow-ai-styles.css';
 const YellowAIChatWidget = () => {
   const pathname = usePathname();
   const isCheckout = pathname.startsWith('/checkout/checkout-form');
+  const isProducts = pathname.startsWith('/products');
   const isHotels = pathname.startsWith('/hotels');
 
   useEffect(() => {
@@ -18,10 +19,6 @@ const YellowAIChatWidget = () => {
       host: host,
     };
 
-    if (isHotels || isCheckout) {
-      return;
-    }
-
     const ensureWidgetPosition = () => {
       setTimeout(() => {
         const widget = document.querySelector('#ymDivBar');
@@ -30,8 +27,6 @@ const YellowAIChatWidget = () => {
           widget.style.right = '20px';
           widget.style.zIndex = '9999';
           widget.style.position = 'fixed';
-
-          // Tambahkan hint text sebagai element terpisah
           addHintText();
         }
       }, 500);
@@ -39,7 +34,6 @@ const YellowAIChatWidget = () => {
 
     // Function to add hint text as separate element
     const addHintText = () => {
-      // Remove existing hint if any
       const existingHint = document.querySelector('.yellow-ai-hint');
       if (existingHint) {
         existingHint.remove();
@@ -75,7 +69,6 @@ const YellowAIChatWidget = () => {
         hintElement.classList.remove('show');
       };
 
-      // Set flag after hint automatically hides
       setTimeout(() => {
         hintAutoHidden = true;
         const widget = document.querySelector('#ymDivBar');
@@ -86,8 +79,6 @@ const YellowAIChatWidget = () => {
         hintElement.addEventListener('mouseenter', showHint);
         hintElement.addEventListener('mouseleave', hideHint);
       }, 61000);
-
-      // Store reference for cleanup
       window._yellowAIHint = hintElement;
     };
 
@@ -116,11 +107,9 @@ const YellowAIChatWidget = () => {
 
       document.head.appendChild(script);
     };
-
     loadYellowAIScript();
 
     return () => {
-      // Cleanup hint element
       if (window._yellowAIHint) {
         window._yellowAIHint.remove();
         window._yellowAIHint = null;
@@ -131,6 +120,39 @@ const YellowAIChatWidget = () => {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const hideYellowAIWidget = () => {
+      const widget = document.querySelector('#ymDivBar');
+      const hint = document.querySelector('.yellow-ai-hint');
+
+      if (widget) {
+        widget.style.display = 'none';
+      }
+      if (hint) {
+        hint.style.display = 'none';
+      }
+    };
+
+    const showYellowAIWidget = () => {
+      const widget = document.querySelector('#ymDivBar');
+      const hint = document.querySelector('.yellow-ai-hint');
+
+      if (widget) {
+        widget.style.display = 'block';
+      }
+      if (hint) {
+        hint.style.display = 'block';
+      }
+    };
+
+    // Check current pathname and show/hide accordingly
+    if (isHotels || isCheckout || isProducts) {
+      hideYellowAIWidget();
+    } else {
+      showYellowAIWidget();
+    }
+  }, [pathname, isHotels, isCheckout, isProducts]);
 
   return null;
 };

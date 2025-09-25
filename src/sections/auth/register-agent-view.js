@@ -253,8 +253,6 @@ export default function RegisterAgentView() {
     setIsRegistered(value);
   };
 
-
-
   const onSubmit = handleSubmit(async (data) => {
     const { phone, NIK, company_name, company_address, NIB, NPWP, socialMedia, asociation_name, association_id, mitra_tier, shop_url, dob, affiliate_tier, termsAccepted } = data;
 

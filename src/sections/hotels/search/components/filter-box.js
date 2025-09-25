@@ -20,33 +20,25 @@ export default function FilterBox({
   maxPrice,
   selectedRatings,
   sortOption,
-  availableStars,
   onMinPriceChange,
   onMaxPriceChange,
   onRatingChange,
   onSortChange,
 }) {
+  // Local state to control RadioGroup value
   const [radioValue, setRadioValue] = React.useState(
     getCurrentSortValue(sortOption)
   );
 
+  // Sync local state with prop changes
   React.useEffect(() => {
     const newValue = getCurrentSortValue(sortOption);
+
+    // Only update if the value actually changed to avoid loops
     if (newValue !== radioValue) {
       setRadioValue(newValue);
     }
-  }, [sortOption]);
-
-  // Process available stars - use dynamic data or fallback to default
-  const processedRatings = React.useMemo(() => {
-    if (availableStars && availableStars.length > 0) {
-      return availableStars.map((item) => ({
-        rating: item.rating,
-        count: item.count,
-      }));
-    }
-    return [5, 4, 3, 2, 1, 0].map((rating) => ({ rating, count: 0 }));
-  }, [availableStars]);
+  }, [sortOption]); // Remove radioValue from dependency to prevent loop
   return (
     <Box
       sx={{
@@ -112,20 +104,9 @@ export default function FilterBox({
         Rating Hotel
       </Typography>
       <Stack direction='column' spacing={0}>
-        {processedRatings.map(({ rating, count }) => (
+        {[5, 4, 3, 2, 1, 0].map((rating) => (
           <FormControlLabel
             key={rating}
-            sx={{
-              width: '100%',
-              margin: 0,
-              '& .MuiFormControlLabel-label': {
-                width: '100%',
-                marginLeft: 0,
-              },
-              '& .MuiCheckbox-root': {
-                padding: '8px 4px 8px 0 ',
-              },
-            }}
             control={
               <Checkbox
                 value={rating.toString()}
@@ -134,45 +115,23 @@ export default function FilterBox({
               />
             }
             label={
-              <Box
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 0.5,
-                  width: '100%',
-                  minWidth: 0,
-                }}>
-                {rating > 0 && (
-                  <Iconify
-                    icon='material-symbols:star-rounded'
-                    sx={{
-                      color: '#F99932',
-                      fontSize: '16px',
-                      flexShrink: 0,
-                    }}
-                  />
-                )}
-                <Typography
-                  variant='body2'
-                  sx={{
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    flex: 1,
-                    minWidth: 0,
-                    fontSize: { xs: '13px', lg: '14px' },
-                  }}>
-                  {rating === 0 ? '' : rating}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <Iconify
+                  icon='material-symbols:star-rounded'
+                  sx={{ color: '#F99932', fontSize: '16px' }}
+                />
+                <Typography variant='body2'>
+                  {rating}
                   {rating === 5
-                    ? ` (${count} Hotel Fantastis)`
+                    ? ' (Fantastis)'
                     : rating === 4
-                    ? ` (${count} Hotel Terbaik)`
+                    ? ' (Terbaik)'
                     : rating === 3
-                    ? ` (${count} Hotel Bagus)`
+                    ? ' (Bagus)'
                     : rating === 2 || rating === 1
-                    ? ` (${count} Hotel)`
+                    ? ' (Oke)'
                     : rating === 0
-                    ? ` Tanpa Bintang (${count} Hotel)`
+                    ? ' (Biasa)'
                     : ''}
                 </Typography>
               </Box>
@@ -184,12 +143,7 @@ export default function FilterBox({
       {/* Sort Section */}
       <Typography
         variant='subtitle2'
-        sx={{
-          mt: { xs: 3, md: 4 },
-          mb: 0,
-          fontSize: '16px',
-          fontWeight: 700,
-        }}>
+        sx={{ mt: 4, mb: 0, fontSize: '16px', fontWeight: 700 }}>
         Urutkan Berdasarkan
       </Typography>
       <RadioGroup
@@ -198,12 +152,6 @@ export default function FilterBox({
           const selectedValue = event.target.value;
           setRadioValue(selectedValue);
           onSortChange(event);
-        }}
-        sx={{
-          '& .MuiFormControlLabel-label': {
-            fontSize: { xs: '13px', lg: '14px' },
-          },
-          pb: { xs: 2, md: 0 },
         }}>
         <FormControlLabel
           value='price_asc'
