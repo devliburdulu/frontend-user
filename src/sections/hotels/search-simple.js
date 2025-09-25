@@ -57,7 +57,6 @@ export default function SearchSimple({
   maxPrice,
   selectedRatings,
   sortOption,
-  availableStars,
   onMinPriceChange,
   onMaxPriceChange,
   onRatingChange,
@@ -474,7 +473,6 @@ export default function SearchSimple({
               onMaxPriceChange={onMaxPriceChange}
               onRatingChange={onRatingChange}
               onSortChange={onSortChange}
-              availableStars={availableStars}
             />
           </Box>
         )}

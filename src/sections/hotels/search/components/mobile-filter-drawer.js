@@ -10,7 +10,6 @@ export default function MobileFilterDrawer({
   maxPrice,
   selectedRatings,
   sortOption,
-  availableStars,
   onMinPriceChange,
   onMaxPriceChange,
   onRatingChange,
@@ -58,7 +57,6 @@ export default function MobileFilterDrawer({
             onMaxPriceChange={onMaxPriceChange}
             onRatingChange={onRatingChange}
             onSortChange={onSortChange}
-            availableStars={availableStars}
           />
         </Box>
       </Drawer>

@@ -73,11 +73,7 @@ export function useHotelPagination({
     if (pageFromUrl !== page) {
       setPage(pageFromUrl);
     }
-  }, [searchParams]); // Remove page from dependency to prevent loop
-
-  // Get correlationId from filterData for page > 1
-  const queryApiCorrelationId =
-    queryApiPage > 1 ? filterData?.correlationId : null;
+  }, [searchParams, page]);
 
   // React Query for fetch hotels
   const {
@@ -99,7 +95,6 @@ export function useHotelPagination({
       queryApiSortBy,
       queryApiRatings,
       queryApiPage,
-      queryApiCorrelationId,
     ],
     queryFn: () =>
       getHotels(
@@ -114,8 +109,7 @@ export function useHotelPagination({
         queryApiHotelName,
         queryApiSortBy,
         queryApiRatings,
-        queryApiPage,
-        queryApiCorrelationId
+        queryApiPage
       ),
     enabled: !!queryApiLocationKey && !!queryApiCheckin && !!queryApiCheckout,
     keepPreviousData: true,
@@ -137,12 +131,6 @@ export function useHotelPagination({
     // Reset page in URL without navigation
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.set('page', '1');
-
-    // Add correlationId to URL if available
-    if (hotelsData?.correlationId) {
-      currentParams.set('correlationId', hotelsData.correlationId);
-    }
-
     const newUrl = `/hotels/search?${currentParams.toString()}`;
 
     if (typeof window !== 'undefined') {
@@ -233,12 +221,6 @@ export function useHotelPagination({
       // Update URL without navigation to avoid scroll jump
       const currentParams = new URLSearchParams(searchParams.toString());
       currentParams.set('page', nextPage.toString());
-
-      // Add correlationId to URL if available and page > 1
-      if (nextPage > 1 && hotelsData?.correlationId) {
-        currentParams.set('correlationId', hotelsData.correlationId);
-      }
-
       const newUrl = `/hotels/search?${currentParams.toString()}`;
 
       // Using history.replaceState to update URL without triggering navigation

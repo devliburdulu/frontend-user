@@ -106,7 +106,6 @@ export default function HotelSearchView() {
               maxPrice={maxPrice}
               selectedRatings={selectedRatings}
               sortOption={sortOption}
-              availableStars={filteredAvailableStars}
               onMinPriceChange={handleMinPriceChange}
               onMaxPriceChange={handleMaxPriceChange}
               onRatingChange={handleRatingChange}
@@ -144,7 +143,7 @@ export default function HotelSearchView() {
             hotelsData={hotelsData}
             page={page}
             selectedRatings={selectedRatings}
-            correlationId={hotelsData?.correlationId}
+            correlationId={hotelsData?.CorrelationId}
             filterData={filterData}
             queryApiRooms={queryApiRooms}
             queryApiAdults={queryApiAdults}
@@ -161,38 +160,6 @@ export default function HotelSearchView() {
   };
 
   const WrapperContent = isDesktop ? Container : Box;
-
-  // Filter dan optimasi availableStars - hanya star dengan count > 0
-  const filteredAvailableStars = React.useMemo(() => {
-    if (!hotelsData?.stars || hotelsData.stars.length === 0) {
-      return [];
-    }
-
-    return hotelsData.stars
-      .filter((item) => {
-        // Handle both object format {Rating: 5, Count: 10} dan number format
-        if (typeof item === 'object' && item?.Count !== undefined) {
-          return item.Count > 0;
-        }
-        // Jika format number, anggap semua tersedia
-        return true;
-      })
-      .map((item) => {
-        // Normalize format untuk konsistensi
-        const rating =
-          typeof item === 'object' && item?.Rating !== undefined
-            ? Number(item.Rating)
-            : Number(item);
-        const count = typeof item === 'object' ? item.Count || 0 : 0;
-
-        return {
-          rating,
-          count,
-        };
-      })
-      .filter(({ rating }) => rating >= 0 && rating <= 5)
-      .sort((a, b) => b.rating - a.rating);
-  }, [hotelsData?.stars]);
 
   return (
     <WrapperContent
@@ -240,7 +207,6 @@ export default function HotelSearchView() {
         maxPrice={maxPrice}
         selectedRatings={selectedRatings}
         sortOption={sortOption}
-        availableStars={filteredAvailableStars}
         onMinPriceChange={handleMinPriceChange}
         onMaxPriceChange={handleMaxPriceChange}
         onRatingChange={handleRatingChange}

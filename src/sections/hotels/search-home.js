@@ -37,6 +37,12 @@ export default function SearchHome({
   onSubmit,
   filterData,
 }) {
+  console.log(
+    'Cek Data Tanggal:',
+    values && values[0] && values[1]
+      ? `${fDate(values[0], 'dd MMM yyyy')} - ${fDate(values[1])}`
+      : 'Tanggal belum dipilih'
+  );
   const [openCalendar, setOpenCalendar] = useState(false);
 
   // Function Date Range Validation (Today CI & CO)
@@ -77,6 +83,7 @@ export default function SearchHome({
   };
 
   const { checkIn, checkOut } = getValidDateRange();
+
   return (
     <>
       <Box
@@ -150,10 +157,12 @@ export default function SearchHome({
                 onClose={() => setOpenCalendar(false)}
                 selectedRange={{
                   from:
-                    checkIn && checkIn.isValid ? checkIn.toDate() : undefined,
+                    values && values[0] && values[0].isValid
+                      ? values[0].toDate()
+                      : undefined,
                   to:
-                    checkOut && checkOut.isValid
-                      ? checkOut.toDate()
+                    values && values[1] && values[1].isValid
+                      ? values[1].toDate()
                       : undefined,
                 }}
                 onConfirm={(range) => {

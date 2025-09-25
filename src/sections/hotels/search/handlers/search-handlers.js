@@ -97,7 +97,9 @@ export const createSearchHandlers = ({
       : [...selectedRatings, value];
 
     setSelectedRatings(newSelectedRatings);
-    setIsDrawerOpen(false);
+
+    // Don't update filterData here - let useEffect in use-hotel-search handle it
+    // This prevents circular dependency and infinite loops
   };
 
   // Sort handlers
@@ -105,30 +107,23 @@ export const createSearchHandlers = ({
     const value = event.target.value;
     const newSortOption = parseSortValue(value);
 
+    // Debug logging removed for production
+
+    // Use functional update to ensure we get the latest state
     setSortOption((prevSort) => {
       return newSortOption;
     });
-
-    setIsDrawerOpen(false);
   };
 
   // Price handlers
   const handleMinPriceChange = (e) => {
     const numericValue = parseRupiahInput(e.target.value);
     setMinPrice(numericValue);
-
-    // Close drawer after price change (optional - user might want to adjust both min and max)
-    // Uncomment if you want drawer to close after price changes
-    // setIsDrawerOpen(false);
   };
 
   const handleMaxPriceChange = (e) => {
     const numericValue = parseMaxPriceInput(e.target.value);
     setMaxPrice(numericValue);
-
-    // Close drawer after price change (optional - user might want to adjust both min and max)
-    // Uncomment if you want drawer to close after price changes
-    // setIsDrawerOpen(false);
   };
 
   // Submit handler

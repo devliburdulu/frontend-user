@@ -28,8 +28,6 @@ export default function MyOrderDetailsItemsView({ detail, loading }) {
     (history) => history.status === 'partial_payment'
   );
 
-  console.log('Cek Data Detail: ', detail);
-
   const getStatusLabel = (status) => {
     const statusOption = ORDER_STATUS_OPTIONS.find(
       (option) => option.value === status
@@ -395,14 +393,14 @@ export default function MyOrderDetailsItemsView({ detail, loading }) {
               {loading ? (
                 <Skeleton width={150} />
               ) : (
-                detail?.hotel_order?.Contact?.FirstName || ''
+                detail?.hotel_order?.guest?.[0]?.firstName
               )}
             </span>
             <span className='mx-1'>
               {loading ? (
                 <Skeleton width={150} />
               ) : (
-                detail?.hotel_order?.Contact?.LastName || ''
+                detail?.hotel_order?.guest?.[0]?.lastName
               )}
             </span>
           </Box>
@@ -424,9 +422,7 @@ export default function MyOrderDetailsItemsView({ detail, loading }) {
             {loading ? (
               <Skeleton width={150} />
             ) : (
-              detail?.hotel_order?.Contact?.MobilePhone ||
-              detail?.hotel_order?.Contact?.HomePhone ||
-              ''
+              detail?.hotel_order?.guest?.[0]?.mobilePhone
             )}
           </Box>
         </Stack>

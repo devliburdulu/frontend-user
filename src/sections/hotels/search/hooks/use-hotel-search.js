@@ -82,13 +82,8 @@ export function useHotelSearch() {
   });
 
   // Effect untuk update URL ketika filter berubah (with debouncing)
-  const isUpdatingRef = useRef(false);
-
   useEffect(() => {
     if (!searchState.isReady || !pagination.queryApiLocationKey) return;
-
-    // Prevent concurrent updates
-    if (isUpdatingRef.current) return;
 
     // Clear previous timeout
     if (updateTimeoutRef.current) {
@@ -116,9 +111,6 @@ export function useHotelSearch() {
         minPrice: searchState.minPrice,
         maxPrice: searchState.maxPrice,
         page: currentPage,
-        correlationId:
-          searchState.filterData?.correlationId ||
-          currentParams.get('correlationId'),
       };
 
       const newParams = new URLSearchParams();
@@ -130,11 +122,6 @@ export function useHotelSearch() {
             newParams.set(key, value.toString());
           }
           // Don't add ratings parameter if empty - this ensures it's removed from URL
-        } else if (key === 'correlationId') {
-          // Special handling for correlationId: only include if it has values
-          if (value && value.trim() !== '') {
-            newParams.set(key, value.toString());
-          }
         } else if (value !== null && value !== undefined && value !== '') {
           if (key === 'minPrice' && value === 0) newParams.set(key, '0');
           else if (value || (key === 'children' && value === 0))
@@ -142,27 +129,15 @@ export function useHotelSearch() {
         }
       });
 
-      // Force URL update when ratings or correlationId change from something to nothing
+      // Force URL update when ratings change from something to nothing
       const currentHasRatings = currentParams.has('ratings');
       const newHasRatings = newParams.has('ratings');
       const ratingsChanged = currentHasRatings !== newHasRatings;
-
-      const currentHasCorrelationId = currentParams.has('correlationId');
-      const newHasCorrelationId = newParams.has('correlationId');
-      const correlationIdChanged =
-        currentHasCorrelationId !== newHasCorrelationId;
-
       const hasChanges = checkFiltersChanged(currentParams, newParams);
-      const forceUpdate = ratingsChanged || correlationIdChanged || hasChanges;
+      const forceUpdate = ratingsChanged || hasChanges;
 
       if (forceUpdate) {
-        isUpdatingRef.current = true;
         searchState.router.replace(`/hotels/search?${newParams.toString()}`);
-
-        // Reset flag after URL update
-        setTimeout(() => {
-          isUpdatingRef.current = false;
-        }, 100);
       }
     }, 100); // 100ms debounce
 
@@ -177,45 +152,35 @@ export function useHotelSearch() {
     searchState.sortOption,
     searchState.minPrice,
     searchState.maxPrice,
-    searchState.filterData?.correlationId,
     searchState.isReady,
     searchState.router,
     pagination.queryApiLocationKey,
   ]);
 
-  // Effect untuk update correlationId
+  // Effect untuk update CorrelationId
   useEffect(() => {
     if (
-      pagination.hotelsData?.correlationId &&
-      searchState.filterData?.correlationId !==
-        pagination.hotelsData.correlationId
+      pagination.hotelsData?.CorrelationId &&
+      searchState.filterData?.CorrelationId !==
+        pagination.hotelsData.CorrelationId
     ) {
       searchState.setFilterData((prev) => ({
         ...prev,
-        correlationId: pagination.hotelsData.correlationId,
+        CorrelationId: pagination.hotelsData.CorrelationId,
       }));
     }
   }, [
     pagination.hotelsData,
-    searchState.filterData?.correlationId,
+    searchState.filterData?.CorrelationId,
     searchState.setFilterData,
   ]);
 
   // Ensure filterData is updated when selectedRatings changes
-  // Use ref to prevent circular dependency
-  const lastRatingsRef = useRef('');
-
   useEffect(() => {
     if (searchState.filterData && searchState.isReady) {
       const currentRatings = searchState.selectedRatings.join(',');
 
-      // Only update if ratings actually changed AND different from last update
-      if (
-        searchState.filterData.ratings !== currentRatings &&
-        lastRatingsRef.current !== currentRatings
-      ) {
-        lastRatingsRef.current = currentRatings;
-
+      if (searchState.filterData.ratings !== currentRatings) {
         searchState.setFilterData((prev) => {
           const newFilterData = { ...prev };
           if (currentRatings === '') {
@@ -229,11 +194,7 @@ export function useHotelSearch() {
         });
       }
     }
-  }, [
-    searchState.selectedRatings,
-    searchState.isReady,
-    searchState.setFilterData,
-  ]); // Remove filterData from dependency
+  }, [searchState.selectedRatings, searchState.isReady]);
 
   return {
     // UI State

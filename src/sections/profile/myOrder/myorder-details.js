@@ -81,43 +81,38 @@ export default function MyOrderDetailsView({ id }) {
   // Show PDF download button only if order has hotel information
   const showPDFButton = !loading && detail && detail.hotel_order;
 
-  const renderHead = // Assuming detail, parsedOptions, showPDFButton are available in scope
-    (
-      <Stack
-        spacing={2} // Consistent spacing for direct children (left group and right group)
-        direction='row'
-        alignItems='center' // Vertically center items in the main row
-        justifyContent='space-between' // Pushes left and right groups apart
-        mb={1.5} // Keep the bottom margin
-      >
-        {/* Left Group: Back Button + Title */}
-        <Stack direction='row' alignItems='center' spacing={1}>
-          {' '}
-          {/* Use Stack for better internal alignment */}
-          <IconButton
-            component={RouterLink}
-            href='/profile/my-order/' // Ensure this path is correct
-            aria-label='Back to My Orders' // Added accessibility label
-          >
-            <Iconify icon='eva:arrow-ios-back-fill' />
-          </IconButton>
-          <Typography
-            variant='h4'
-            sx={{
-              fontSize: { xs: '1rem', md: '1.25rem' },
-              fontWeight: 600,
-            }}>
-            Detail Pesanan
-          </Typography>
-        </Stack>
-
-        <Box sx={{ flexShrink: 0 }}>
-          {showPDFButton && (
-            <DynamicPDFDownloadButton detail={detail} options={parsedOptions} />
-          )}
-        </Box>
+  const renderHead = (
+    <Stack
+      spacing={2}
+      direction='row'
+      alignItems='center'
+      justifyContent='space-between'
+      mb={1.5}>
+      <Stack direction='row' alignItems='center' spacing={1}>
+        {' '}
+        <IconButton
+          component={RouterLink}
+          href='/profile/my-order/'
+          aria-label='Back to My Orders'>
+          <Iconify icon='eva:arrow-ios-back-fill' />
+        </IconButton>
+        <Typography
+          variant='h4'
+          sx={{
+            fontSize: { xs: '1rem', md: '1.25rem' },
+            fontWeight: 600,
+          }}>
+          Detail Pesanan
+        </Typography>
       </Stack>
-    );
+
+      <Box sx={{ flexShrink: 0 }}>
+        {showPDFButton && (
+          <DynamicPDFDownloadButton detail={detail} options={parsedOptions} />
+        )}
+      </Box>
+    </Stack>
+  );
 
   return (
     <Container sx={{ mt: 5, mb: { xs: 8, md: 10 } }}>

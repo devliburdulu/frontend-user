@@ -269,7 +269,7 @@ export default function HotelView() {
       selectedType: selectedItemType,
       ...(selectedItemType === 'hotel' &&
         selectedHotelName && { hotelName: selectedHotelName }),
-      correlationId: filterData?.correlationId,
+      CorrelationId: filterData?.CorrelationId,
       ratings: filterData?.ratings || '',
       sort: filterData?.sort || 'price_asc',
       // sortDir: filterData?.sortDir || 'desc',
@@ -458,7 +458,7 @@ export default function HotelView() {
               <ShopCardDefault
                 data={item}
                 idx={`PopularHotel-${item.HotelKey}`}
-                correlationId={recommendationHotels.data.correlationId}
+                correlationId={recommendationHotels.data.CorrelationId}
               />
             </Grid>
           ))
