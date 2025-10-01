@@ -6,6 +6,7 @@ import moment from 'moment';
 const ProductActions = ({
   qty,
   isHotelConvention,
+  isLiburTiket,
   isAddToCart,
   isBuyNow,
   handleAddToCart,
@@ -16,7 +17,8 @@ const ProductActions = ({
   data,
   setError,
 }) => {
-  const shouldShowAddToCart = !isHotelConvention && downPayment === 0;
+  const shouldShowAddToCart =
+    !isHotelConvention && !isLiburTiket && downPayment === 0;
 
   const handleAddToCartWithValidation = () => {
     const hasBookingDari = data.options.some(

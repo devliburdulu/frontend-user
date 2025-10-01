@@ -98,3 +98,12 @@
         padding: 7px 11px;
     }
 } */
+
+/* Hide widget di halaman tertentu - Higher specificity */
+body[data-hide-yellow-ai="true"] #ymDivBar,
+body[data-hide-yellow-ai="true"] .yellow-ai-hint {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}

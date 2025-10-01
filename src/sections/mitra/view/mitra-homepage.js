@@ -103,9 +103,9 @@ export default function MitraHomepage({ mitra }) {
               handleChangeTab={handleChangeTab}
               seller={dataSeller}
             />
-            {dataSeller?.shop_title === 'Curaweda' && (
+            {/* {dataSeller?.shop_title === 'Curaweda' && (
               <MitraCollab data={collabs} />
-            )}
+            )} */}
             <div className='py-4'>
               <UserMitraProfile
                 sellerId={dataSeller?.seller_id}

@@ -26,6 +26,7 @@ export default function ProductContentDetail({
   handleAddToCart,
   handleBuyNow,
   isHotelConvention,
+  isLiburTiket,
 }) {
   const [activeTab, setActiveTab] = useState(0);
   const tabRefs = useRef([]);
@@ -222,6 +223,7 @@ export default function ProductContentDetail({
               handleAddToCart={handleAddToCart}
               handleBuyNow={handleBuyNow}
               isHotelConvention={isHotelConvention}
+              isLiburTiket={isLiburTiket}
               childrenProduct={childrenProduct}
               subSku={subSku}
             />
