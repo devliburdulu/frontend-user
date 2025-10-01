@@ -21,6 +21,7 @@ export const navConfig = [
   { id: 46, title: 'Objek Wisata', path: '/products/objek-wisata' },
   { id: 48, title: 'Relaksasi', path: '/products/relaksasi' },
   { id: 75, title: 'Libur Voucher', path: '/products/libur-voucher' },
+  { id: 78, title: 'Libur Tiket', path: '/products/libur-tiket' },
 ];
 
 export default function CategoryView() {
@@ -82,7 +83,6 @@ export default function CategoryView() {
             setProduct(data);
           })
           .finally(() => setIsLoading(false));
-        // console.log('result: ', result);
       } catch (error) {
         console.error(error);
       }
@@ -95,9 +95,6 @@ export default function CategoryView() {
       sessionStorage.setItem('search', filter.categoryName);
     }
   }, [filter]);
-
-  console.log('filter: ', filter);
-  console.log('product: ', product);
 
   useEffect(() => {
     if (filter.categoryId != 0) {
@@ -180,12 +177,6 @@ export default function CategoryView() {
         {mdUp && (
           <div className='sticky top-[120px] max-h-[720px]'>
             <ProductSidebar
-              // filter={filter}
-              // setFilter={setFilter}
-              // searchValue={searchValue}
-              // setSearchValue={setSearchValue}
-              // priceValue={priceValue}
-              // setPriceValue={setPriceValue}
               filter={filter}
               setFilter={setFilter}
               product={product}
@@ -224,7 +215,7 @@ export default function CategoryView() {
             </div>
           )}
           {/* Pagination */}
-          {!isLoading && product?.items?.length > 0 && (
+          {!isLoading && product?.items?.length > 11 && (
             <div className='flex justify-center w-full p-3'>
               <Pagination
                 shape='rounded'

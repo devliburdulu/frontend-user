@@ -23,6 +23,7 @@ export default function ProductContentAction({
   handleAddToCart,
   handleBuyNow,
   isHotelConvention,
+  isLiburTiket,
   childrenProduct,
   subSku,
 }) {
@@ -34,10 +35,10 @@ export default function ProductContentAction({
     setIsBookingDateInvalid(error !== '');
   }, [error]);
 
-  // Logika validasi booking date yang hanya berlaku jika produk memiliki custom options Booking Dari dan Booking Sampai
+  // Logic validate booking date yang hanya berlaku jika produk memiliki custom options Booking Dari dan Booking Sampai
   useEffect(() => {
     if (cart && data && data.options) {
-      // Periksa apakah produk memiliki custom options Booking Dari dan Booking Sampai
+      // Check if product has custom options Booking Dari dan Booking Sampai
       const hasBookingDari = data.options.some(
         (opt) => opt.title === 'Booking Dari'
       );
@@ -45,7 +46,7 @@ export default function ProductContentAction({
         (opt) => opt.title === 'Booking Sampai'
       );
 
-      // Hanya terapkan validasi jika kedua custom options ada
+      // Only apply validation if both custom options exist
       if (hasBookingDari && hasBookingSampai) {
         const customOptions =
           cart.cartItem.product_option.extension_attributes.custom_options;
@@ -72,7 +73,6 @@ export default function ProductContentAction({
           setError('');
         }
       } else {
-        // Jika tidak ada custom options booking, reset error
         setError('');
       }
     }
@@ -102,6 +102,7 @@ export default function ProductContentAction({
         handleChange={handleChange}
         handleChangeCustomOption={handleChangeCustomOption}
         isHotelConvention={isHotelConvention}
+        isLiburTiket={isLiburTiket}
         cart={cart}
         data={data}
         setError={setError}

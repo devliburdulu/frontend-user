@@ -9,6 +9,16 @@ const YellowAIChatWidget = () => {
   const isCheckout = pathname.startsWith('/checkout/checkout-form');
   const isProducts = pathname.startsWith('/products');
   const isHotels = pathname.startsWith('/hotels');
+  const shouldHide = isCheckout || isProducts || isHotels;
+
+  // Set data attribute to body IMMEDIATELY for CSS handling
+  useEffect(() => {
+    if (shouldHide) {
+      document.body.setAttribute('data-hide-yellow-ai', 'true');
+    } else {
+      document.body.removeAttribute('data-hide-yellow-ai');
+    }
+  }, [shouldHide]);
 
   useEffect(() => {
     const botId = process.env.NEXT_PUBLIC_YELLOW_AI_BOT_ID || 'x1755662762547';
@@ -122,37 +132,39 @@ const YellowAIChatWidget = () => {
   }, []);
 
   useEffect(() => {
-    const hideYellowAIWidget = () => {
+    const updateWidgetVisibility = () => {
       const widget = document.querySelector('#ymDivBar');
       const hint = document.querySelector('.yellow-ai-hint');
 
       if (widget) {
-        widget.style.display = 'none';
+        widget.style.display = shouldHide ? 'none' : 'block';
       }
       if (hint) {
-        hint.style.display = 'none';
+        hint.style.display = shouldHide ? 'none' : 'block';
       }
+
+      // Return true if both elements found or not needed
+      return !!(widget || hint);
     };
 
-    const showYellowAIWidget = () => {
-      const widget = document.querySelector('#ymDivBar');
-      const hint = document.querySelector('.yellow-ai-hint');
+    // Initial check
+    updateWidgetVisibility();
 
-      if (widget) {
-        widget.style.display = 'block';
+    // Retry mechanism to handle late-loading widget
+    let retryCount = 0;
+    const maxRetries = 10; // Check for 5 seconds (10 x 500ms)
+    const retryInterval = setInterval(() => {
+      if (updateWidgetVisibility() || retryCount >= maxRetries) {
+        clearInterval(retryInterval);
       }
-      if (hint) {
-        hint.style.display = 'block';
-      }
+      retryCount++;
+    }, 500);
+
+    // Cleanup interval on unmount
+    return () => {
+      clearInterval(retryInterval);
     };
-
-    // Check current pathname and show/hide accordingly
-    if (isHotels || isCheckout || isProducts) {
-      hideYellowAIWidget();
-    } else {
-      showYellowAIWidget();
-    }
-  }, [pathname, isHotels, isCheckout, isProducts]);
+  }, [pathname, isCheckout, isProducts, isHotels]);
 
   return null;
 };

@@ -26,6 +26,7 @@ const PaymentMethod = ({
   selectedPaymentMethod,
   setValue,
   total,
+  hasCurawedaItem = false,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedFromDialog, setSelectedFromDialog] = useState(false);
@@ -113,7 +114,7 @@ const PaymentMethod = ({
         {displayedPayments.map(renderPaymentItem)}
       </Stack>
 
-      {Object.keys(groupedPayments).length > 0 && (
+      {Object.keys(groupedPayments).length > 0 && !hasCurawedaItem && (
         <Button
           variant='outlined'
           onClick={() => setDialogOpen(true)}

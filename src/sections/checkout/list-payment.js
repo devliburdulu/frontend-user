@@ -12,6 +12,7 @@ import PaymentMethod from './payment-method';
 // ----------------------------------------------------------------------
 
 export default function ListPayment({
+  item,
   isGetCart,
   isGetTotals,
   total,
@@ -28,42 +29,55 @@ export default function ListPayment({
   const payLater = payment?.data['PayLater'] || [];
   const qris = payment?.data['QRIS'] || [];
 
-  const allPayments = [
-    ...virtualAccount.map((item) => ({
-      ...item,
-      category: 'Virtual Account',
-    })),
-    ...eWallet.map((item) => ({
-      ...item,
-      category: 'Uang Elektronik',
-    })),
-    ...qris.map((item) => ({
-      ...item,
-      category: 'QRIS',
-    })),
-    ...creditCard.map((item) => ({
-      ...item,
-      category: 'Kartu Kredit / Debit / Cicilan',
-    })),
-    ...payLater.map((item) => ({
-      ...item,
-      category: 'Paylater',
-    })),
-    ...overTheCounter.map((item) => ({
-      ...item,
-      category: 'Gerai Retail',
-    })),
-  ];
+  const hasCurawedaItem = item?.some((cartItem) =>
+    cartItem?.sku?.toLowerCase().includes('curaweda')
+  );
+
+  const allPayments = hasCurawedaItem
+    ? [
+        ...qris.map((item) => ({
+          ...item,
+          category: 'QRIS',
+        })),
+      ]
+    : [
+        ...virtualAccount.map((item) => ({
+          ...item,
+          category: 'Virtual Account',
+        })),
+        ...eWallet.map((item) => ({
+          ...item,
+          category: 'Uang Elektronik',
+        })),
+        ...qris.map((item) => ({
+          ...item,
+          category: 'QRIS',
+        })),
+        ...creditCard.map((item) => ({
+          ...item,
+          category: 'Kartu Kredit / Debit / Cicilan',
+        })),
+        ...payLater.map((item) => ({
+          ...item,
+          category: 'Paylater',
+        })),
+        ...overTheCounter.map((item) => ({
+          ...item,
+          category: 'Gerai Retail',
+        })),
+      ];
 
   const selectedPaymentData = allPayments.find(
     (item) => item.code === selectedPaymentMethod
   );
 
   useEffect(() => {
-    if (!selectedPaymentMethod && defaultPaymentMethod) {
+    if (hasCurawedaItem && qris.length > 0) {
+      setValue('payment_method', qris[0].code);
+    } else if (!selectedPaymentMethod && defaultPaymentMethod) {
       setValue('payment_method', defaultPaymentMethod);
     }
-  }, [defaultPaymentMethod]);
+  }, [defaultPaymentMethod, hasCurawedaItem, qris]);
 
   useEffect(() => {
     if (selectedPaymentData) {
@@ -72,8 +86,6 @@ export default function ListPayment({
       setValue('subtotal_amount', subtotal_amount);
     }
   }, [selectedPaymentMethod]);
-
-  console.log('Cek Harga Total:', total);
 
   return (
     <Stack spacing={2}>
@@ -103,6 +115,7 @@ export default function ListPayment({
               selectedPaymentMethod={selectedPaymentMethod}
               setValue={setValue}
               total={total}
+              hasCurawedaItem={hasCurawedaItem}
             />
           )}
         </CardContent>
